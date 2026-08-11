@@ -4,12 +4,18 @@ Goal: Stand up an Elastic Security SIEM lab and detect simulated attacker activi
 
 What I did
 Created an Elastic Cloud trial and provisioned a Security-type project (first attempt used a plain Elasticsearch project — no Alerts/Rules pages exist there — recreated correctly as a Security project).
+
 Deployed a Kali Linux VM as the monitored endpoint; installed Elastic Agent + Elastic Defend (Traditional Endpoints, Complete EDR), enrolled it into Fleet, confirmed Healthy status.
+
 Generated attacker-style traffic with Nmap (-sS, -sT, full port scans).
 Verified telemetry in Discover via ES|QL (FROM logs-* | WHERE process.name == "nmap") — confirmed process + network events captured.
+
 Built a custom dashboard ("Kali Lab Overview") visualizing event volume over time by process.
+
 Authored a custom detection rule ("Nmap Scan Detected", KQL: process.name: "nmap"), enabled it, confirmed real alerts fired with full attribution (host, user, process lineage, source/dest IP/port).
+
 Found the rule generated 104 alerts from a single scan, hitting Kibana's per-execution alert cap — flagged as a tuning issue for Day 2.
+
 Screenshots
 screenshots/day1/fleet-agent-healthy.png — Fleet → Agents: kali Healthy, kali-lab-2 policy
 screenshots/day1/discover-nmap-events.png — Discover: nmap process/network events
