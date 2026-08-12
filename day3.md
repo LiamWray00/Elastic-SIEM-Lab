@@ -15,5 +15,3 @@
 ## Lesson learned
 Detection (a rule firing) and investigation (understanding what actually happened) are different skills supported by different tooling. Elastic Security's Timeline pulls in correlated context automatically from an alert and renders raw process/network events into readable narratives, which is closer to what a SOC analyst actually does during triage than just reading an alert's summary line. Also learned that alerts can silently drop out of view under narrow default time filters — worth checking both the time range and status tabs (Open/Acknowledged/Closed) before assuming data is missing.
 
-## Note on pace
-Shorter session than Day 1/2 — this was intentionally a single focused skill (investigation/triage) rather than a full build-detect-tune cycle, not every lab day needs equal scope.
