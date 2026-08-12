@@ -1,14 +1,14 @@
 # Day 1 — Aug 10, 2026
 
-**Goal:** Stand up an Elastic Security SIEM lab and detect simulated attacker activity end-to-end.
+**Goal:** Use my Elastic Security SIEM lab and detect simulated attacker activity end-to-end.
 
 ## What I did
-- Created an Elastic Cloud trial and provisioned a **Security-type project** (first attempt used a plain Elasticsearch project — no Alerts/Rules pages exist there — recreated correctly as a Security project).
-- Deployed a Kali Linux VM as the monitored endpoint; installed **Elastic Agent + Elastic Defend** (Traditional Endpoints, Complete EDR), enrolled it into Fleet, confirmed **Healthy** status.
-- Generated attacker-style traffic with **Nmap** (`-sS`, `-sT`, full port scans).
-- Verified telemetry in **Discover** via ES|QL (`FROM logs-* | WHERE process.name == "nmap"`) — confirmed process + network events captured.
+- Created an Elastic Cloud account and provisioned a **Security-type project**
+- Deployed a Kali Linux VM on Proxmox as the monitored endpoint; installed **Elastic Agent + Elastic Defend** (Traditional Endpoints, Complete EDR), enrolled it into my Fleet, and confirmed **Healthy** status.
+- Generated attacker-style traffic with **Nmap** from Kali (`-sS`, `-sT`, full port scans).
+- Verified telemetry in **Discover** via ES|QL (`FROM logs-* | WHERE process.name == "nmap"`) — confirmed processes and the network events captured.
 - Built a custom **dashboard** ("Kali Lab Overview") visualizing event volume over time by process.
-- Authored a custom **detection rule** ("Nmap Scan Detected", KQL: `process.name: "nmap"`), enabled it, confirmed real alerts fired with full attribution (host, user, process lineage, source/dest IP/port).
+- Created a custom **detection rule** ("Nmap Scan Detected", KQL: `process.name: "nmap"`), enabled it, and confirmed real alerts fired with full attribution (host, user, process lineage, source/dest IP/port).
 - Found the rule generated **104 alerts from a single scan**, hitting Kibana's per-execution alert cap — flagged as a tuning issue for Day 2.
 
 ## Screenshots
