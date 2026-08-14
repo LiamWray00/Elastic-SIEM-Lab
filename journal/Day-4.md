@@ -1,9 +1,9 @@
 # Day 4 — Aug 13, 2026
 
-**Goal:** Add a second monitored host to confirm detection rules generalize across endpoints, not just single-host.
+**Goal:** Add a second monitored host to confirm detection rules generalize across endpoints, not just a single host.
 
 ## What I did
-- Tried a Windows 11 VM first — it hung on boot, so switched to Ubuntu instead.
+- Tried a Windows 11 VM on Proxmox first, but it got hung up on boot, so switched to Ubuntu instead.
 - Hit repeated `no space left on device` errors installing Elastic Agent, despite a 42GB disk. Root cause: the VM was booting into Ubuntu's **live/try session** (a 1.5GB temp filesystem), not an actual install — "Try or Install Ubuntu" only opens a live desktop, and I kept missing the separate "Install Ubuntu" icon needed to actually install.
 - Also hit and fixed an unrelated SSH "host key changed" warning on Windows (stale `known_hosts` entry from earlier failed attempts).
 - Once properly installed, enrolled Elastic Agent on the Ubuntu VM (`lwubuntu`) into a new policy (`ubuntu-lab-2`) — confirmed Healthy in Fleet.
@@ -15,4 +15,4 @@
 2. `screenshots/day4/alerts-multihost-nmap.png` — Alerts page showing the rule firing for both hosts
 
 ## Lesson learned
-Most of today was infrastructure troubleshooting, not Elastic-specific work — a realistic reminder that SOC/lab environments involve as much systems administration as security tooling. Also confirmed a real detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
+Most of today was infrastructure troubleshooting, not Elastic-specific work. This was a helpful and realistic reminder that SOC/lab environments involve as much systems administration as security tooling. I also confirmed a real detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
