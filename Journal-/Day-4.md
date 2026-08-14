@@ -5,8 +5,8 @@
 ## What I did
 - Tried a Windows 11 VM on Proxmox first, but it got hung up on boot, so switched to Ubuntu instead.
 - Hit repeated `no space left on device` errors installing Elastic Agent, despite a 42GB disk. Root cause: the VM was booting into Ubuntu's **live/try session** (a 1.5GB temp filesystem), not an actual install — "Try or Install Ubuntu" only opens a live desktop, and I kept missing the separate "Install Ubuntu" icon needed to actually install.
-- Also hit and fixed an unrelated SSH "host key changed" warning on Windows (stale `known_hosts` entry from earlier failed attempts).
-- Once properly installed, enrolled Elastic Agent on the Ubuntu VM (`lwubuntu`) into a new policy (`ubuntu-lab-2`) — confirmed Healthy in Fleet.
+- Also hit and fixed an unrelated SSH "host key changed" warning on Windows (just previous `known_hosts` entry from earlier failed attempts).
+- Once properly installed, enrolled Elastic Agent on the Ubuntu VM (`lwubuntu`) into a new policy (`ubuntu-lab-2`) and confirmed it was Healthy in Fleet.
 - Ran `nmap` **from Ubuntu targeting Kali**, simulating host-to-host scanning instead of isolated single-host activity.
 - Confirmed in Discover that both `kali` and `lwubuntu` generated nmap events, and the existing "Nmap Scan Detected" rule fired for the new host **with no rule changes needed** — proving the detection logic generalizes rather than being hardcoded to one host.
 
