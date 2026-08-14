@@ -12,12 +12,10 @@
 - Found the rule generated **104 alerts from a single scan**, hitting Kibana's per-execution alert cap — flagged as a tuning issue for Day 2.
 
 ## Screenshots
-1. `screenshots/day1/fleet-agent-healthy.png` — Fleet → Agents: `kali` Healthy, `kali-lab-2` policy
-2. `screenshots/day1/discover-nmap-events.png` — Discover: nmap process/network events
-3. `screenshots/day1/alerts-summary-clean.png` — Alerts summary: 4 alerts, clean scan
-4. `screenshots/day1/detection-rules-list.png` — Detection rules list: rule Enabled, Last response Succeeded
-5. `screenshots/day1/alert-flood-104.png` — 104-alert warning (best screenshot — a real problem found, not just the happy path)
-6. `screenshots/day1/dashboard-events-over-time.png` — Dashboard: Events Over Time chart
+1. `fleet-agent-healthy.png` — Fleet → Agents: `kali` Healthy, `kali-lab-2` policy
+2. `screenshots/day1/detection-rules-list.png` — Detection rules list: rule Enabled, Last response Succeeded
+3. `104-alert-warning.png` — 104-alert warning (best screenshot — a real problem found, not just the happy path)
+4. `events-over-time.png` — Dashboard: Events Over Time chart
 
 ## Lesson learned
 Elastic Cloud project type matters — only a Security project includes the SIEM apps (Alerts, Detection rules, Cases). Also discovered that a broad rule query matching every network event per scanned port creates significant alert noise (104 alerts from one scan) — identified as a tuning target for Day 2.
