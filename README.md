@@ -56,6 +56,7 @@ Alerts (triaged, attributed to host/user/process)
 - [Day 1](journal/day1.md) — Initial lab setup, agent enrollment, first detection rule
 - [Day 2](journal/day2.md) — Rule tuning, SSH brute-force scenario, threshold rule
 - [Day 3](journal/day3.md) — Alert investigation using Timeline
+- [Day 4](journal/day4.md) — Second Host Enrollment (Ubuntu) 
 
 ## Rule definitions (exported)
 
