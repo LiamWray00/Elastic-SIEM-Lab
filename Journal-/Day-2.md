@@ -13,38 +13,45 @@
 #1.
   
 ![Nmap rule in effect](../screenshots/day2/nmap-rule-in-effect.png)
-   Tuned nmap rule: 2 alerts (before/after pairing with Day 1's 104-alert cap warning)
+   
+   `Tuned nmap rule: 2 alerts (before/after pairing with Day 1's 104-alert cap warning)`
 
 #2.
 
 ![Hydra terminal output](../screenshots/day2/hydra-terminal-output.png)
-   Hydra terminal output: attack running, then throttled ("too many connection errors")
+   
+   `Hydra terminal output: attack running, then throttled ("too many connection errors")`
 
 #3.
   
 ![Discover sshd burst](../screenshots/day2/sshd-activity-spike.png)
-   Discover: 695 sshd documents, activity spike in histogram
+   
+   `Discover: 695 sshd documents, activity spike in histogram`
 
   
+
   
 #4. 
 
 ![Threshold rule definition](../screenshots/day2/threshold-rule-definition.png)
-   Threshold rule Definition panel: `process.name: "sshd"`, Threshold type, "Results aggregated by host.name >= 10," severity High
+   
+   `Threshold rule Definition panel: `process.name: "sshd"`, Threshold type, "Results aggregated by host.name >= 10," severity High`
+
 
   
-   
 #5. 
 
 ![Execution results log](../screenshots/day2/execution-results-log.png)
-   Execution results log: 0/1/1/0 alert pattern across scheduled runs, proving the rule detects the burst specifically rather than firing constantly
+   
+   `Execution results log: 0/1/1/0 alert pattern across scheduled runs, proving the rule detects the burst specifically rather than firing constantly`
 
 
 
 #6.
 
 ![SSH alert detail](../screenshots/day2/alerttab-nmap-rule-tuned.png)
-   Alerts tab detail view for "SSH Brute Force Detected" — the fired alert with host/reason attribution
+
+   `Alerts tab detail view for "SSH Brute Force Detected" — the fired alert with host/reason attribution`
 
 
 ## Lesson learned
