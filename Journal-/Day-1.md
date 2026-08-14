@@ -12,7 +12,7 @@
 - Found the rule generated **104 alerts from a single scan**, hitting Kibana's per-execution alert cap — flagged as a tuning issue for Day 2.
 
 ## Screenshots
-1. `fleet-agent-healthy.png` — Fleet → Agents: `kali` Healthy, `kali-lab-2` policy
+1. `screenshots/Day-1/fleet-agent-healthy.png` — Fleet → Agents: `kali` Healthy, `kali-lab-2` policy
 2. `screenshots/day1/detection-rules-list.png` — Detection rules list: rule Enabled, Last response Succeeded
 3. `104-alert-warning.png` — 104-alert warning (best screenshot — a real problem found, not just the happy path)
 4. `events-over-time.png` — Dashboard: Events Over Time chart
