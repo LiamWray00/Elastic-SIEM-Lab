@@ -11,8 +11,20 @@
 - Confirmed in Discover that both `kali` and `lwubuntu` generated nmap events, and the existing "Nmap Scan Detected" rule fired for the new host **with no rule changes needed** — proving the detection logic generalizes rather than being hardcoded to one host.
 
 ## Screenshots
-1. `screenshots/day4/discover-multihost-events.png` — Discover showing nmap events from both `kali` and `lwubuntu`
-2. `screenshots/day4/alerts-multihost-nmap.png` — Alerts page showing the rule firing for both hosts
+
+
+#1.
+
+![Nmap rule in effect](../screenshots/day4/Ubuntu-discover-multihost-events-day4.png)
+   
+   Discover showing nmap events from both `kali` and `lwubuntu`
+
+
+#2.
+
+![Nmap rule in effect](../screenshots/day4/Ubuntu-alerts-multihost-nmap-day4.png)
+
+  `Alerts page showing the rule firing for both hosts`
 
 ## Lesson learned
 Most of today was infrastructure troubleshooting, not Elastic-specific work. This was a helpful and realistic reminder that SOC/lab environments involve as much systems administration as security tooling. I also confirmed a real detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
