@@ -67,5 +67,5 @@ Exported detection rule configurations are in [`/rules`](rules):
 - [`detection-rules-export.ndjson`](rules/detection-rules-export.ndjson) — original raw manual export
 - [`rules_api_export.ndjson`](rules/rules_api_export.ndjson) — output of the scripted API export (see `/scripts/export_rules.py`)
 
-Manual export via **Detection Rules page → select rules → Bulk actions → Export** (note: the generic Stack Management → Saved Objects → Export path does *not* work for detection rules — they're excluded from that export by design). The API export was done via a Python script calling Kibana's Detection Engine API directly — see [`scripts/export_rules.py`](scripts/export_rules.py).
+Manual export via **Detection Rules page → select rules → Bulk actions → Export** (note: the generic Stack Management → Saved Objects → Export path does *not* work for detection rules — they're excluded from that export by design). The API export was done via a Python script calling Kibana's Detection Engine API directly — see [`scripts/export_rules.py`](Scripts/export_rules.py).
 
