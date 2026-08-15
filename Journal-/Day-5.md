@@ -14,7 +14,7 @@
 
 ![API export terminal output](../screenshots/day5/rules_api_export.png)
 
-   `Terminal output confirming successful API export — 3 rules pulled, saved to rules_api_export.ndjson`
+   **Terminal output confirming successful API export — 3 rules pulled, saved to rules_api_export.ndjson**
 
 
 
