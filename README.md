@@ -1,6 +1,6 @@
 # Elastic SIEM Home Lab
 
-This is my personal home lab simulating a small SOC environment: an endpoint monitored by Elastic Security, generating, detecting, and investigating simulated attacker behavior (network reconnaissance and SSH brute-force).
+Hello! This is my hands-on home lab simulating a small SOC environment. I deployed an endpoint monitoring stack with Elastic Security, then generated, detected, and investigated simulated attacks (network reconnaissance and SSH brute-force) across multiple hosts — including tuning a rule that was flooding alerts and scripting a rule export via Kibana's API.
 
 ## Architecture
 
@@ -18,38 +18,36 @@ Elastic Cloud — Security project
 Alerts (triaged, attributed to host/user/process)
 ```
 
-## What I built
+## Highlights
+ 
+- **Deployed and monitored two endpoints** (Kali + Ubuntu) with Elastic Agent / Elastic Defend, confirmed healthy in Fleet.
+- **Built and tuned a custom detection rule** — an initial nmap-scan rule flooded 104 alerts from a single scan; refined it to fire 2, by matching on the specific event instead of every network connection.
+  ![Alert flood before tuning](screenshots/day1/104-alert-warning.png)
+  *104 alerts hitting Kibana's per-execution cap — the problem that drove the tuning work below.*
+- **Wrote a threshold-based rule** for SSH brute-force detection (`sshd` process count ≥10/host in 5 min), since a single occurrence is normal but a burst isn't.
+- **Investigated a fired alert with Timeline**, correlating 75 related events into a readable process narrative — moving past "a rule fired" to "here's what actually happened."
+  ![Timeline investigation](screenshots/day3/timeline-ssh-bruteforce-investigation.png)
+  *Process lineage behind the SSH brute-force alert, rendered as a readable narrative rather than raw JSON.*
 
-- Deployed **Elastic Agent** with the **Elastic Defend** integration (Traditional Endpoints, Complete EDR preset) on a Kali Linux VM, enrolled via Fleet.
-- Queried live endpoint telemetry in **Discover** using ES|QL.
-- Built a **dashboard** visualizing process/network event volume over time.
-- Simulated and detected **two attack scenarios**:
-  - **Network reconnaissance (Nmap)** — custom query rule (`process.name: "nmap" and event.category: "process"`), tuned after an initial version caused alert flooding (104 alerts → 2 alerts per scan).
-  - **SSH brute force (Hydra)** — threshold rule (`process.name: "sshd"`, ≥10 events per host in 5 minutes), since single sshd events are normal but a burst indicates an attack.
-- Verified rules using both live alerts and the rule **execution history**, confirming correct behavior (quiet when idle, firing precisely during attack windows).
-- Investigated a fired alert using **Timeline**, correlating 75 related events and reviewing Elastic's human-readable event renderers to confirm the process lineage behind the SSH brute-force detection (sshd repeatedly forking child processes per login attempt) — moving from "a rule fired" to "here's what actually happened."
-
-## Key screenshots
-
-| Screenshot | What it shows |
-|---|---|
-| `screenshots/day1/fleet-agent-healthy.png` | Elastic Agent enrolled and healthy on Kali |
-| `screenshots/day1/discover-nmap-events.png` | Nmap process/network events captured in Discover |
-| `screenshots/day1/alert-flood-104.png` | Initial rule hitting Kibana's per-execution alert cap (104 alerts from one scan) |
-| `screenshots/day2/nmap-rule-tuned.png` | Tuned rule: same scan, 2 alerts instead of 104 |
-| `screenshots/day2/hydra-terminal-output.png` | Hydra brute-force attempt, throttled by SSH's connection protection |
-| `screenshots/day2/sshd-activity-spike.png` | 695 sshd process events captured during the attack |
-| `screenshots/day2/threshold-rule-definition.png` | SSH Brute Force Detected — threshold rule config |
-| `screenshots/day2/execution-results-log.png` | Rule execution history: 0 alerts when idle, 1 alert during the actual attack window |
-| `screenshots/day3/timeline-ssh-bruteforce-investigation.png` | Timeline investigation: correlated sshd process events with readable narrative for the brute-force alert |
+  
+- **Confirmed detection logic generalizes** — enrolled a second host and the existing nmap rule fired correctly with zero changes.
+- **Scripted rule export via Kibana's Detection Engine API** (Python), instead of relying on manual UI export.
+  
+## What this demonstrates
+ 
+**- Endpoint deployment**  
+**- Detection rule authoring and tuning**  
+**- Alert triage/investigation**  
+**- Multi-host operations**   
+**- Working with the platform programmatically, not just through the UI**  
 
 ## Lessons learned
 
 - **Project type matters.** A plain "Elasticsearch" Elastic Cloud project has no Security app (no Alerts, Detection rules, Cases) — only a "Security" project type includes it.
 - **Rule query granularity drives alert volume.** Matching on every related event (e.g. one alert per network connection in a port scan) causes alert fatigue; matching on the more meaningful event (e.g. process launch) keeps signal high and noise low.
-- **Not every telemetry source has a dedicated event category.** Elastic Defend surfaces SSH activity as `event.category: process`, not a dedicated "authentication" category — worth checking actual field values in Discover before assuming a category exists.
-- **Different rule types fit different signals.** A single occurrence of `nmap` running is inherently suspicious (Custom query rule fits). A single `sshd` process is normal — only a *burst* is suspicious (Threshold rule fits). Picking the right rule type is part of detection design, not just plumbing.
-- **Detection and investigation are different skills.** A rule firing tells you *something* happened; Timeline's correlated view and readable event narratives are what actually explain *what* happened — closer to real SOC triage than reading an alert summary line.
+- **Not every telemetry source has a dedicated event category.** Elastic Defend surfaces SSH activity as `event.category: process`, not a dedicated "authentication" category; it is worth checking the actual field values in Discover before assuming a category exists.
+- **Different rule types fit different signals.** A single occurrence of `nmap` running is inherently suspicious (Custom query rule fits). A single `sshd` process is normal, and only a *burst* is suspicious (Threshold rule fits). Picking the right rule type is crucial for the detection design.
+- **Detection and investigation are different skills.** A rule firing tells you *something* happened; Timeline's correlated view and readable event narratives are what actually explain *what* happened — closer to real SOC triage rather than reading an alert summary line.
 
 ## Day-by-day journal
 
