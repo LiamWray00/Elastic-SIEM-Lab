@@ -35,7 +35,7 @@
 
 ![Threshold rule definition](../screenshots/day2/threshold-rule-definition.png)
    
-   `Threshold rule Definition panel: `process.name: "sshd"`, Threshold type, "Results aggregated by host.name >= 10," severity High`
+   Threshold rule Definition panel: `process.name: "sshd"`, Threshold type, "Results aggregated by host.name >= 10," severity High
 
 
   
@@ -46,12 +46,6 @@
    `Execution results log: 0/1/1/0 alert pattern across scheduled runs, proving the rule detects the burst specifically rather than firing constantly`
 
 
-
-#6.
-
-![SSH alert detail](../screenshots/day2/alerttab-nmap-rule-tuned.png)
-
-   `Alerts tab detail view for "SSH Brute Force Detected" — the fired alert with host/reason attribution`
 
 
 ## Lesson learned
