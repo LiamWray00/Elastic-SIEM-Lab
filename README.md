@@ -5,7 +5,7 @@ Hello! This is my hands-on home lab simulating a small SOC environment. I deploy
 ## Architecture
 
 ```
-Kali Linux VM on dedicated Proxmox server (endpoint)
+Kali Linux VM + Ubuntu VM on dedicated Proxmox server (endpoints)
    │  Elastic Agent + Elastic Defend (Complete EDR)
    ▼
 Elastic Cloud — Security project
@@ -47,7 +47,9 @@ Alerts (triaged, attributed to host/user/process)
 - **Rule query granularity drives alert volume.** Matching on every related event (e.g. one alert per network connection in a port scan) causes alert fatigue; matching on the more meaningful event (e.g. process launch) keeps signal high and noise low.
 - **Not every telemetry source has a dedicated event category.** Elastic Defend surfaces SSH activity as `event.category: process`, not a dedicated "authentication" category; it is worth checking the actual field values in Discover before assuming a category exists.
 - **Different rule types fit different signals.** A single occurrence of `nmap` running is inherently suspicious (Custom query rule fits). A single `sshd` process is normal, and only a *burst* is suspicious (Threshold rule fits). Picking the right rule type is crucial for the detection design.
-- **Detection and investigation are different skills.** A rule firing tells you *something* happened; Timeline's correlated view and readable event narratives are what actually explain *what* happened — closer to real SOC triage rather than reading an alert summary line.
+- **Detection and investigation are different skills.** A rule firing tells you *something* happened; Timeline's correlated view and readable event narratives are what actually explain *what* happened; closer to real SOC triage rather than reading an alert summary line.
+- **Detection logic should generalize.** A rule written on process/event attributes rather than host-specific values requires zero changes to cover newly enrolled endpoints.  
+- **The Kibana UI's Saved Objects export doesn't work for detection rules** (they're excluded by type), but the Detection Engine's own REST API exports them cleanly and can be scripted; I realized this was a more realistic way to manage rules as config than manual UI export.
 
 ## Day-by-day journal
 
@@ -60,11 +62,10 @@ Alerts (triaged, attributed to host/user/process)
 ## Rule definitions (exported)
 
 Exported detection rule configurations are in [`/rules`](rules):
-- [`detection-rules-export-formatted.json`](rules/detection-rules-export-formatted.json) — readable, indented version
-- [`detection-rules-export.ndjson`](rules/detection-rules-export.ndjson) — original raw export
 
-Exported via **Detection Rules page → select rules → Bulk actions → Export** (note: the generic Stack Management → Saved Objects → Export path does *not* work for detection rules — they're excluded from that export by design).
+- [`detection-rules-export-formatted.json`](rules/detection-rules-export-formatted.json) — readable, indented version of the manual UI export
+- [`detection-rules-export.ndjson`](rules/detection-rules-export.ndjson) — original raw manual export
+- [`rules_api_export.ndjson`](rules/rules_api_export.ndjson) — output of the scripted API export (see `/scripts/export_rules.py`)
 
-## Rule definitions (exported)
+Manual export via **Detection Rules page → select rules → Bulk actions → Export** (note: the generic Stack Management → Saved Objects → Export path does *not* work for detection rules — they're excluded from that export by design). The API export was done via a Python script calling Kibana's Detection Engine API directly — see [`scripts/export_rules.py`](scripts/export_rules.py).
 
-See `/rules` for exported JSON of each detection rule (Stack Management → Saved Objects → Export).
