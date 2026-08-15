@@ -26,7 +26,7 @@
   
 ![Discover sshd burst](../screenshots/day2/sshd-activity-spike.png)
    
-   **Discover: 695 sshd documents, activity spike in histogram**
+   **Discovered 695 sshd documents, large activity spike in histogram**
 
   
 
