@@ -52,10 +52,10 @@ Alerts (triaged, attributed to host/user/process)
 ## Day-by-day journal
 
 - [Day 1](Journal-/Day-1.md) — Initial lab setup, agent enrollment, first detection rule
-- [Day 2](Journal/Day-2.md) — Rule tuning, SSH brute-force scenario, threshold rule
-- [Day 3](Journal/Day-3.md) — Alert investigation using Timeline
-- [Day 4](Journal/Day-4.md) — Second Host Enrollment (Ubuntu) 
-- [Day 5](Journal/Day-5.md) — Scripted rule export via API
+- [Day 2](Journal-/Day-2.md) — Rule tuning, SSH brute-force scenario, threshold rule
+- [Day 3](Journal-/Day-3.md) — Alert investigation using Timeline
+- [Day 4](Journa-l/Day-4.md) — Second Host Enrollment (Ubuntu) 
+- [Day 5](Journal-/Day-5.md) — Scripted rule export via API
   
 ## Rule definitions (exported)
 
