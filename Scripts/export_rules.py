@@ -27,7 +27,7 @@ headers = {
 }
 
 # Detection Engine's rule export endpoint. Passing no rule_id filters
-# exports all rules; you can add ?exclude_export_details=true too.
+# exports all rules
 url = f"{KIBANA_URL}/api/detection_engine/rules/_export"
 
 def main():
