@@ -8,7 +8,7 @@
 - Also hit and fixed an unrelated SSH "host key changed" warning on Windows (just previous `known_hosts` entry from earlier failed attempts).
 - Once properly installed, enrolled Elastic Agent on the Ubuntu VM (`lwubuntu`) into a new policy (`ubuntu-lab-2`) and confirmed it was Healthy in Fleet.
 - Ran `nmap` **from Ubuntu targeting Kali**, simulating host-to-host scanning instead of isolated single-host activity.
-- Confirmed in Discover that both `kali` and `lwubuntu` generated nmap events, and the existing "Nmap Scan Detected" rule fired for the new host **with no rule changes needed** — proving the detection logic generalizes rather than being hardcoded to one host.
+- Confirmed in Discover that both `kali` and `lwubuntu` generated nmap events, and the existing "Nmap Scan Detected" rule fired for the new host **with no rule changes needed**, showing how the detection logic generalizes rather than being hardcoded to one host.
 
 ## Screenshots
 
@@ -22,9 +22,9 @@
 
 #2.
 
-![Nmap rule in effect](../screenshots/day4/Ubuntu-alerts-multihost-nmap-day4.png)
+![Nmap rule in effect](../screenshots/day4/Ubuntu-alerts-multihost-nmap.png)
 
   `Alerts page showing the rule firing for both hosts`
 
 ## Lesson learned
-Most of today was infrastructure troubleshooting, not Elastic-specific work. This was a helpful and realistic reminder that SOC/lab environments involve as much systems administration as security tooling. I also confirmed a real detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
+Most of today was infrastructure troubleshooting, not Elastic-specific work. This was a helpful and realistic reminder for myself that SOC/lab environments involve as much systems administration as security tooling. I also confirmed a detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
