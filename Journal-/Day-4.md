@@ -15,16 +15,16 @@
 
 #1.
 
-![Nmap rule in effect](../screenshots/day4/Ubuntu-discover-multihost-events-day4.png)
+![Discover multi-host events](../screenshots/day4/Ubuntu-discover-multihost-events-day4.png)
    
-   Discover showing nmap events from both `kali` and `lwubuntu`
+   **Discover showing nmap events from both `kali` and `lwubuntu`**
 
 
 #2.
 
-![Nmap rule in effect](../screenshots/day4/Ubuntu-alerts-multihost-nmap.png)
+![Alerts multi-host nmap](../screenshots/day4/Ubuntu-alerts-multihost-nmap.png)
 
-  `Alerts page showing the rule firing for both hosts`
+  **Alerts page showing the rule firing for both hosts**
 
 ## Lesson learned
 Most of today was infrastructure troubleshooting, not Elastic-specific work. This was a helpful and realistic reminder for myself that SOC/lab environments involve as much systems administration as security tooling. I also confirmed a detection-engineering principle: a rule written generically (on process/event attributes, not host-specific values) requires zero changes to cover newly enrolled endpoints.
