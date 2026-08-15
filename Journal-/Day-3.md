@@ -14,9 +14,9 @@
 
 #1.
 
-![Nmap rule in effect](../screenshots/day3/timeline-ssh-bruteforce-investigation.png)
+![Timeline investigation](../screenshots/day3/timeline-ssh-bruteforce-investigation.png)
 
-   `Timeline view showing the correlated sshd process events and readable narrative for the brute-force alert`
+   Timeline view showing the correlated sshd process events and readable narrative for the brute-force alert
 
 ## Lesson learned
 
