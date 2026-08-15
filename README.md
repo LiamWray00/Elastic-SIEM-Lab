@@ -57,7 +57,8 @@ Alerts (triaged, attributed to host/user/process)
 - [Day 2](journal/day2.md) — Rule tuning, SSH brute-force scenario, threshold rule
 - [Day 3](journal/day3.md) — Alert investigation using Timeline
 - [Day 4](journal/day4.md) — Second Host Enrollment (Ubuntu) 
-
+- [Day 5](journal/day5.md) — Scripted rule export via API
+  
 ## Rule definitions (exported)
 
 Exported detection rule configurations are in [`/rules`](rules):
