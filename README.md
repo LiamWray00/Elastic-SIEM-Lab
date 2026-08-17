@@ -43,7 +43,6 @@ Alerts (triaged, attributed to host/user/process)
 
 ## Lessons learned
 
-- **Project type matters.** A plain "Elasticsearch" Elastic Cloud project has no Security app (no Alerts, Detection rules, Cases) — only a "Security" project type includes it.
 - **Rule query granularity drives alert volume.** Matching on every related event (e.g. one alert per network connection in a port scan) causes alert fatigue; matching on the more meaningful event (e.g. process launch) keeps signal high and noise low.
 - **Not every telemetry source has a dedicated event category.** Elastic Defend surfaces SSH activity as `event.category: process`, not a dedicated "authentication" category; it is worth checking the actual field values in Discover before assuming a category exists.
 - **Different rule types fit different signals.** A single occurrence of `nmap` running is inherently suspicious (Custom query rule fits). A single `sshd` process is normal, and only a *burst* is suspicious (Threshold rule fits). Picking the right rule type is crucial for the detection design.
