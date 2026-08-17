@@ -5,9 +5,9 @@
 ## What I did
 1. Tuned the "Nmap Scan Detected" rule from `process.name: "nmap"` to `process.name: "nmap" and event.category: "process"` and cut alert volume from 104 to 2 per scan by matching only the process-launch event instead of every network connection.
 2. Set up an SSH brute-force scenario: enabled `sshd` on the Kali VM, installed hydra, ran a dictionary attack against Kali's own SSH service (`hydra -l root -P rockyou.txt ssh://<kali-ip>`). First run was throttled by SSH's built-in connection-error protection after ~72 attempts; ran a second burst after clearing the hydra restore file.
-3. Queried Discover (ES|QL) to confirm the attack was captured — found `sshd`/`sshd-session`/`sshd-auth` process events, around 695 documents in the time window, confirming Elastic Defend tracks SSH activity as `event.category: process` rather than a dedicated authentication category.
+3. Queried Discover (ES|QL) to confirm the attack was captured and found `sshd`/`sshd-session`/`sshd-auth` process events, around 695 documents in the time window, confirming Elastic Defend tracks SSH activity as `event.category: process` rather than a dedicated authentication category.
 4. Built a **Threshold rule type** that states when an "SSH Brute Force Detected" event occurs and configured to fire when the `sshd` process count is ≥10, grouped by `host.name`, within a 5-minute window (rule runs every 3 minutes with 1-minute lookback). Severity: High, risk score 73.
-5. Verified the rule via its **Execution results log** rather than just checking for a single alert — confirmed it correctly stayed quiet (0 alerts) during idle periods and fired (1 alert) on the two execution windows that overlapped hydra burst, showing the non-noisy detection.
+5. Verified the rule via its **Execution results log** rather than just checking for a single alert and confirmed it correctly stayed quiet (0 alerts) during idle periods and fired (1 alert) on the two execution windows that overlapped hydra burst, showing the non-noisy detection.
 
 ## Screenshots
 #1.
