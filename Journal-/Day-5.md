@@ -5,7 +5,7 @@
 ## What I did
 - Created a dedicated Kibana **API key** (Stack Management → API keys) scoped for this task rather than reusing personal login credentials.
 - Wrote a short Python script (`export_rules.py`) using the `requests` library to call Kibana's Detection Engine API (`/api/detection_engine/rules/_export`) and pull all detection rules as an NDJSON.
-- Ran the script locally (`pip install requests`, then `python export_rules.py`) and confirmed a successful export: 3 rules returned — **SSH Brute Force Detected**, **Nmap Scan Detected**, and the built-in **Endpoint Security (Elastic Defend)** rule — saved to `rules_api_export.ndjson`.
+- Ran the script locally (`pip install requests`, then `python export_rules.py`) and confirmed a successful export: 3 rules returned — **SSH Brute Force Detected**, **Nmap Scan Detected**, and the built-in **Endpoint Security (Elastic Defend)** rule and saved to `rules_api_export.ndjson`.
 - Before publishing, scanned the exported file for sensitive fields (passwords, tokens, connectors, credentials) to confirm it was safe to make public, since no rule has an action/connector attached.
 - Removed the real API key from the script and replaced it with a placeholder.
 - Uploaded both the script and its output to the repo (`scripts/export_rules.py`, `rules/rules_api_export.ndjson`).
