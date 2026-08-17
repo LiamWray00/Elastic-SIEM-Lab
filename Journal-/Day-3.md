@@ -3,10 +3,10 @@
 **Goal:** Move from detection to investigation while using Elastic Security's Timeline feature to triage the SSH brute-force alert, rather than just confirming it fired.
 
 ## What I did
-- Located the "SSH Brute Force Detected" alerts from Day 2 (initially not visible under the default "Last 24 hours" filter — had to widen the Alerts time range and check the Open/Acknowledged/Closed status).
+- Located the "SSH Brute Force Detected" alerts from Day 2 (initially not visible under the default "Last 24 hours" filter and had to widen the Alerts time range and check the Open/Acknowledged/Closed status).
 - Opened **Investigate in Timeline** on one of the alerts, which auto-populated a scoped query (`process.name: "sshd"`, filtered to `host.name: "kali"`) across the relevant time window.
-- Reviewed the resulting 75 correlated events using Timeline's **event renderers** — human-readable narrative lines (e.g. "root @ kali forked process sshd via parent process sshd with result unknown") instead of raw JSON.
-- Confirmed the process lineage behind the brute-force detection: the main `sshd` listener process repeatedly forking a new child `sshd` process per incoming connection attempt — the process-level signature of a brute-force attack.
+- Reviewed the resulting 75 correlated events using Timeline's **event renderers** — readable narrative lines (e.g. "root @ kali forked process sshd via parent process sshd with result unknown") instead of raw JSON.
+- Confirmed the process lineage behind the brute-force detection: the main `sshd` listener process repeatedly forking a new child `sshd` process per connection attempt — the process-level signature of a brute-force attack.
 - Checked the **Correlation** tab (EQL sequence queries), which was empty by default, since it requires a defined multi-step event sequence rather than a plain field query.
   
 
